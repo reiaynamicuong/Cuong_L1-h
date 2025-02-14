@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            background: url('../picture/105955-3840x2160-desktop-4k-heart-wallpaper-photo.png') no-repeat center center;
+            background-size: 100% 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1.5s ease-in-out;
+            position: relative;
+        }
+        h1 {
+            color: #ff4d6d;
+            animation: pulse 1.5s infinite alternate;
+        }
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 5px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #e63950;
+        }
+        .message-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            text-align: center;
+        }
+        .message-box img {
+            width: 150px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        /* Cải thiện question box */
+        .question-box {
+            display: none;
+            font-size: 20px;
+            color: #ff4d6d;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 400px;
+            margin: 20px auto;
+            text-align: center;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .big-yes {
+            font-size: 18px;
+            transition: font-size 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <h1>Will You Be My Valentine? 💖</h1>
+        <p>You make my world brighter, and I can't imagine this day without you!</p>
+        <div class="buttons">
+            <button onclick="celebrate()">Yes! 💕</button>
+            <button id="noButton" onclick="askQuestions()">No 😢</button>
+        </div>
+
+        <!-- Câu hỏi khi bấm "No" -->
+        <div id="questionBox" class="question-box"></div>
+    </div>
+
+    <!-- Hộp thông báo khi bấm "Yes" -->
+    <div id="messageBox" class="message-box">
+        <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmo3c3l5ODh3ZGN6NHhhaDE2Mjg1ZjkwOXczdDFxbWM3dTBtaW9zaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/9XY4f3FgFTT4QlaYqa/giphy.gif" alt="Love Celebration">
+        <p>Yay! You made my day! 💖</p>
+    </div>
+
+    <script>
+        let questions = [
+            "Are you sure? 🤔",
+            "Do you really want to break my heart? 💔",
+            "Don't you think we look cute together? 😍",
+            "Wouldn't it be fun to spend Valentine's together? 🎉",
+            "Still saying No? 😢"
+        ];
+        let questionIndex = 0;
+        let yesButton = document.querySelector("button");
+        
+        function celebrate() {
+            document.getElementById('messageBox').style.display = 'block';
+        }
+
+        function askQuestions() {
+            let questionBox = document.getElementById("questionBox");
+            questionBox.style.display = "block";
+            questionBox.style.opacity = "0"; // Làm mờ trước khi đổi câu hỏi
+
+            setTimeout(() => {
+                questionBox.innerText = questions[questionIndex];
+                questionBox.style.opacity = "1"; // Làm hiệu ứng fade-in
+            }, 200);
+
+            if (questionIndex < questions.length - 1) {
+                questionIndex++;
+            } else {
+                questionBox.innerText = "Ok fine, just say YES! 🙌";
+                yesButton.classList.add("big-yes");
+                yesButton.style.fontSize = (parseInt(window.getComputedStyle(yesButton).fontSize) + 10) + "px";
+            }
+        }
+    </script>
+</body>
+</html>
